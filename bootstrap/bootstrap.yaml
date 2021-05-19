@@ -1,0 +1,26 @@
+---
+
+# Nombre del usuario de tu VM
+#
+# Genera la contraseña en un linux con:
+#   openssl passwd -6 -salt xyz <escribe_aquí_la_contraseña>
+#   Copia/pega el resultado en el campo password: más abajo (deja un espacio detrás de los ':')
+#
+# Durante el proceso de bootstrap cambiaré la constraseña con:
+#   echo usuario:password | chpasswd -e
+#
+usuario: luis
+password: $6$xyz$XjeexdX/3/PyM3qe0uxvvUrR4QnpwaeANARczNd6WDCazT1PrP9lgsvNzFWqr.4ri8mOsHWqH29t4xKE915oA0
+
+# Nombre del box Vagrant
+boxname: 'generic/ubuntu2010'
+
+# Nombre del equipo
+hostname: 'coder'
+
+# Timezone
+timezone: 'Europe/Madrid'
+
+# Teclado
+teclado: 'es'
+

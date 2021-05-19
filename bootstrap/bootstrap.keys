@@ -1,0 +1,14 @@
+#
+# Copia aqui tus claves SSH públicas
+#
+# Utiliza la(s) clave(s) pública SSH que tengas generada en tu
+# ordenador cliente. Haz un copy/paste de tu clave o claves a
+# este fichero antes de arrancar la máquina virtual con `vagrant up`
+#
+# Ejemplos:
+#
+#  cat ~/.ssh/id_rsa.pub >> bootstrap/bootstrap.keys
+#  cat ~/.ssh/authorized_keys >> bootstrap/bootstrap.keys
+#
+#
+

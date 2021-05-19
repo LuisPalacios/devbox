@@ -1,0 +1,59 @@
+# jupyterlab
+jupyterlab
+
+# Pandas
+pandas
+matplotlib
+Faker
+
+# Postgres
+psycopg2-binary==2.8.6
+sqlalchemy==1.3.2
+ipython-sql
+prettytable==0.7.2 # requeriment for ipython-sql
+
+# riak
+riak==2.7.0
+
+# MongoDB
+pymongo==3.11.2
+
+# Neo4j
+# py2neo v3
+git+https://github.com/technige/py2neo.git@v3
+ipython-cypher
+networkx==2.5
+decorator==4.4.2
+
+# cassandra
+cassandra-driver==3.24.0
+git+https://github.com/dvillaj/ipython-cql.git 
+
+# NOTA: Relativo a ipython-cql.git... se muestra lo siguiente. Pdte de mejorarlo:
+# WARNING: Built wheel for ipython-cql is invalid: Metadata 1.2 mandates PEP 440 version, but '0.5-dvillaj' is not
+# DEPRECATION: ipython-cql was installed using the legacy 'setup.py install' method, because a wheel could not be built for it. A possible replacement is to fix the wheel build issue reported above. You can find discussion regarding this at https://github.com/pypa/pip/issues/8368.
+
+# REST Services
+bottle
+requests
+
+# Word Cloud
+wordcloud
+
+# Print Formating
+pprintpp
+
+# Read Excel from Pandas
+xlrd
+xlwt
+openpyxl
+
+# JupyterLab 
+
+# https://github.com/jupyterlab/jupyterlab-git/releases
+jupyterlab-git==0.30.1
+
+jupyterlab-drawio
+lckr-jupyterlab-variableinspector
+jupyter_nbextensions_configurator
+jupyter_contrib_nbextensions

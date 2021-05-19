@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# confcat: quita las lineas con comentarios, muy util como sustituto
+# al programa "cat" cuando queremos ver solo las lineas efectivas,
+# no las lineas que tienen comentarios.
+
+grep -vh '^[[:space:]]*#' "$@" | grep -v '^//' | grep -v '^;' | grep -v '^$'

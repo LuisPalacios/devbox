@@ -1,0 +1,28 @@
+#
+# Configuración segura de SSH
+#
+# !! NO OLVIDES AÑADIR TU CLAVE PÚBLICA AL FICHERO:
+#
+#	bootstrap/bootstrap.keys
+#
+# Solo se puede entrar con Clave Pública.
+#
+Include /etc/ssh/sshd_config.d/*.conf
+Port 22
+PubkeyAuthentication yes
+PasswordAuthentication no
+AuthenticationMethods publickey
+ChallengeResponseAuthentication no
+UsePAM no
+AllowAgentForwarding yes
+AllowTcpForwarding yes
+GatewayPorts yes
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+AddressFamily inet
+PrintMotd no
+PrintLastLog no
+Subsystem sftp	/usr/lib/openssh/sftp-server
+AcceptEnv LANG LC_*
+
