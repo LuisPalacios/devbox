@@ -40,7 +40,9 @@ luis@jupiter:~/devbox$ vagrant up
 
 ## SSH 
 
-| Nota sobre el Networking: Si te fijas en el fichero `Vagrantfile` verás que he optado por dos estrategias distintas para el Networking. En el caso de un Host Linux opto por establecer una dirección IP fija a la máquina virtual, mientras que en el caso del proveedor VirtualBox utilizo por forwarding, es decir networking privado. |
+Nota sobre el Networking: Si te fijas en el fichero `Vagrantfile` verás que he optado por dos estrategias distintas para el Networking. En el caso de un Host Linux opto por establecer una dirección IP fija a la máquina virtual, mientras que en el caso del proveedor VirtualBox utilizo por forwarding, es decir networking privado.
+
+<br/>
 
 ### HOST Linux con KVM/Libvirt
 
