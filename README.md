@@ -1,6 +1,8 @@
 # Developer Box
 
-Este repositorio contiene todo lo necesario para crear, usando [Vagrant](https://www.vagrantup.com/), una máquina virtual orientada al Desarrollo de Software. Está configurada para funcionar con los proveedores VirtualBox o KVM. Además podrá utilizarse para conectar con servicios adicionales de Bases de Datos, cuadernos Jupyter de ejercicios, etc... (mira al final de este README)
+Este repositorio contiene todo lo necesario para crear, usando [Vagrant](https://www.vagrantup.com/), una máquina virtual orientada al Desarrollo de Software. Está configurada para funcionar con los proveedores VirtualBox o KVM. Además podrá utilizarse para conectar con servicios adicionales de Bases de Datos, cuadernos Jupyter de ejercicios, etc... (mira al final de este README). 
+
+El repositorio está basado en [NoSQL-box](https://github.com/dvillaj/NoSQL-box) de Daniel Villanueva, con modificaciones y literatura adicional que he añadido. 
 
 <br/>
 
@@ -197,7 +199,7 @@ En ambos casos tendrás acceso vía:
 
 Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, que puedes usar para dotar de contenido a tu máquina virtual. 
 
-* [Ejercicios de Data Science](https://github.com/dvillaj/Taller_BBDD). Un repositorio dedicado a albergar ejercicios y material utilizado durante el Master en Data Science al que asistí durante Marzo de 2021.
+* [Ejercicios de Data Science](https://github.com/LuisPalacios/Master-DS). Un repositorio dedicado a albergar ejercicios y material utilizado durante el Master en Data Science al que asistí durante Marzo de 2021.
 
 ```console
  $ ssh luis@coder
@@ -205,7 +207,7 @@ Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`nec
  $ git clone https://github.com/LuisPalacios/Master-DS.git
 ```
 
-* [Taller de Bases de Datos](https://github.com/LuisPalacios/Master-DS) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo. Te permitirá instalar servidores Postgres, Riak, Cassandra, Mongodb, Neo4j, etc. usando Docker
+* [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo. Te permitirá instalar servidores Postgres, Riak, Cassandra, Mongodb, Neo4j, etc. usando Docker
 
 ```console
  $ ssh luis@coder
