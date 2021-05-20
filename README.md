@@ -40,94 +40,159 @@ luis@jupiter:~/devbox$ vagrant up
 
 ## SSH 
 
-### Conexión a VM corriendo en HOST Linux (KVM/Libvirt)
+| Nota sobre el Networking: Si te fijas en el fichero `Vagrantfile` verás que he optado por dos estrategias distintas para el Networking. En el caso de un Host Linux opto por establecer una dirección IP fija a la máquina virtual, mientras que en el caso del proveedor VirtualBox utilizo por forwarding, es decir networking privado. |
 
-* Veamos cómo configurar el cliente SSH para el caso de conectar con la VM cuando la hemos levantado en un HOST Linux con dirección IP fija pública.
+### HOST Linux con KVM/Libvirt
+
+* Una vez que tienes la máquina virtual funcionando en tu Host Linux deberías poder ver algo parecido a esto desde `virt-manager`:
+
+![VM en Linux](vagrant-kvm.png?raw=true "VM en Linux")
+
+Configuro `.ssh/config` para facilitar la conexión. Uso IP fija porque en KVM/Libvirt configuré networking público en el `Vagrantfile`:
 
 ```config
 Host coder
-  HostName 192.168.1.13		<== Cámbialo por la IP de tu VM
-  User luis			<== Cámbialo por tu usuario
+  HostName 192.168.1.13    <== Cámbialo por la IP de tu VM
+  User luis                <== Cámbialo por tu usuario
   Port 22
   StrictHostKeyChecking no
   UserKnownHostsFile=/dev/null
   LogLevel=error
 ```
 
-* Jupyter Lab
+**Conexión vía SSH**
 
-Ya puedes conectar con JupyterLabs... (esta IP es la estática que yo puse)
-
-* [http://192.168.1.13:8001](http://192.168.1.13:8001)
-
-* Conexión vía SSH
+La contraseña es la de tu clave pública/privada
 
 ```console
-luis@jupiter:~$ ssh coder
-Enter passphrase for key '/home/luis/.ssh/id_rsa':
+luis @ idefix ➜  ~  ssh coder
+Enter passphrase for key '/Users/luis/.ssh/id_rsa':
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ _______________________________
+< Bienvenido a mi servidor luis >
+ -------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+
 luis@coder:~$
+```
+
+**Conectar con Jupyter Lab**
+
+Conecto con JupyterLab desde la red LAN (o incluso en local). En mi ejemplo utilicé la IP 192.168.1.13 en la sección `override.vm.network "public_network"` del `Vagrantfile`: 
+
+- http://127.0.0.1:8001
+- http://192.168.1.13:8001
+
+<br/>
+
+### HOST Mac (o Windows) con VirtualBox
+
+* Otro ejemplo, si lo monto en un Mac o un Windows, configuro el cliente SSH para conectar con la VirtualBox (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coderlocal`.
+
+```console
+Host coderlocal
+  HostName 127.0.0.1
+  User luis
+  Port 2222
+```
+
+**Conecta vía SSH**
+
+Si la estableciste, recuerda que la contraseña es la de tu clave pública/privada
+
+```console
+luis @ idefix ➜  ~  ssh coderlocal
+Enter passphrase for key '/Users/luis/.ssh/id_rsa':
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ _______________________________
+< Bienvenido a mi servidor luis >
+ -------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+luis@coder:~$
+```
+
+**Conectar con Jupyter Lab**
+
+A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab, por lo tanto podrás acceder en local (desde tu propio ordenador) o desde la red LAN a la que estes conectado:
+
+- http://127.0.0.1:8001
+- http://mi-ordernador.dominio.local:8001
+  
+
+
+### Conexión al HOST por internet vía SSH 
+
+Un caso típico es conectar a tu HOST vía un servidor intermedia con SSH. Supongamos el siguiente caso: 
+
+```config
+                                                 ┌─┬────────────┬─┐
+                                                 │ ├────────────┤ │
+                                                 │ │            │ │
+                                                 │ │ coder VM   │ │
+                                                 │ │            │ │
+┌──────────┐               ┌───────────┐         │ └────────────┘ │
+│          │   INTERNET    │           │  LOCAL  │                │
+│ Cliente  ├──────────────►│ SSHServer ├───────► │  KVM HOST      │
+│          │               │           │  LAN    │                │
+└──────────┘               └───────────┘         └────────────────┘
+                       miserver.midom.org           192.168.1.13
+
+```
+
+El cliente configura port forwarding: 
+
+<br/>
+```console
+Host coder-via-internet
+  HostName miserver.midom.org
+  User luis
+  Port 12345
+  LocalForward 8001 192.168.1.13:8001
+```
+
+```console
+luis @ idefix ➜  ~  ssh coder-via-internet
+luis@coder:~$
+```
+
+En el caso de querer mapear el puerto (no necesitas la Shell): 
+
+```console
+luis @ idefix ➜  ~  ssh -N coder-via-internet
 ```
 
 <br/>
 
-### Conexión a VM corriendo en HOST local en VirtualBox
+**Conectar con Jupyter Lab**
 
-* Configuración en un cliente SSH en mi Mac para conectar con VM en mi Mac (localhost). Miro el comando `vagrant ssh-config` para confirmar y luego configuro el fichero ~/.ssh/config del cliente, lo llamo `coderlocal`.
+En este caso tendrás acceso vía: 
 
-```console
-Host coderlocal
-  HostName 10.20.30.40
-  User luis
-  Port 22
-  LocalForward 8001 127.0.0.1:8001
-  LocalForward 3100 127.0.0.1:3100
-  LocalForward 27017 127.0.0.1:27017
-  LocalForward 7474 127.0.0.1:7474
-  LocalForward 5050 127.0.0.1:5050
-  LocalForward 8098 127.0.0.1:8098
-  LocalForward 8082 127.0.0.1:8082
-  LocalForward 7687 127.0.0.1:7687
-  StrictHostKeyChecking no
-  UserKnownHostsFile=/dev/null
-  LogLevel=error  
-```
-
-* Conecto con la VM en local
-
-```console
-luis @ idefix ➜  ~ ssh coderlocal
-luis@coder:~$
-```
-
-* Jupyter Lab
-
-Una vez que has abierto una sesión SSH se activa el forwarding de puertos, por lo tanto podrás conectar con el servicio JupyterLab simplemente con: 
-
-* [http://127.0.0.1:8001](http://127.0.0.1:8001)
+- http://127.0.0.1:8001
 
 <br/>
 
 ## Proyecto relacionados.
 
-Para poder sacarle provecho a esta máquina virtual necesitarás contenido. Aquí tienes una lista de proyectos que puedes usar para dotar de contenido a tu máquina virtual. 
+Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, que puedes usar para dotar de contenido a tu máquina virtual. 
 
-* Descarga el [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo.
+* [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo. Te permitirá instalar servidores Postgres, Riak, Cassandra, Mongodb, Neo4j, etc. usando Docker
 
 ```console
  $ ssh luis@coder
  $ curl -s https://raw.githubusercontent.com/dvillaj/NoSQL-Services/master/scripts/setup.sh | bash
 ```
-
- 
- * [Servicios Jupyter-Labs](https://github.com/LuisPalacios/devbox-db-jupyterlabs)
-
-- JupyterLabs
-
-* [Servicios de bases de datos](https://github.com/LuisPalacios/devbox-db-services)
-
-- Postgres
-- Riak
-- Cassandra
-- Mongodb
-- Neo4j
 
