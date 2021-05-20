@@ -94,10 +94,13 @@ Conecto con JupyterLab desde la red LAN (o incluso en local). En mi ejemplo util
 
 ### HOST Mac (o Windows) con VirtualBox
 
-* Otro ejemplo, si lo monto en un Mac o un Windows, configuro el cliente SSH para conectar con la VirtualBox (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coderlocal`.
+* Otro ejemplo, si lo monto en un Mac o un Windows, configuro el cliente SSH para conectar con la VirtualBox (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coder-local`.
+
+![VM en Virtualbox](vagrant-vb.png?raw=true "VM en Virtualbox")
+
 
 ```console
-Host coderlocal
+Host coder-local
   HostName 127.0.0.1
   User luis
   Port 2222
@@ -146,7 +149,7 @@ Un caso típico es conectar a tu HOST vía un servidor intermedia con SSH. Supon
                                                  │ │            │ │
 ┌──────────┐               ┌───────────┐         │ └────────────┘ │
 │          │   INTERNET    │           │  LOCAL  │                │
-│ Cliente  ├──────────────►│ SSHServer ├───────► │  KVM HOST      │
+│ Cliente  ├──────────────►│ SSHServer ├───────► │  KVM HOST      │
 │          │               │           │  LAN    │                │
 └──────────┘               └───────────┘         └────────────────┘
                        miserver.midom.org           192.168.1.13
