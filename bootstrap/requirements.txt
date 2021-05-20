@@ -20,7 +20,8 @@ pymongo==3.11.2
 
 # Neo4j
 # py2neo v3
-git+https://github.com/technige/py2neo.git@v3
+#git+https://github.com/technige/py2neo.git@v3
+py2neo
 ipython-cypher
 networkx==2.5
 decorator==4.4.2
