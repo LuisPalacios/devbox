@@ -149,8 +149,6 @@ Una situación que puede ser muy típica es que quieras conectar con tu HOST des
 
 ```config
                                                  ┌─┬────────────┬─┐
-                                                 │ ├────────────┤ │
-                                                 │ │            │ │
                                                  │ │ coder VM   │ │
                                                  │ │            │ │
 ┌──────────┐               ┌───────────┐         │ └────────────┘ │
@@ -162,9 +160,8 @@ Una situación que puede ser muy típica es que quieras conectar con tu HOST des
 
 ```
 
-El cliente configura port forwarding: 
+Configuramos port forwarding en el Cliente: 
 
-<br/>
 ```console
 Host coder-via-internet
   HostName miserver.midom.org
@@ -173,12 +170,14 @@ Host coder-via-internet
   LocalForward 8001 192.168.1.13:8001
 ```
 
+Conectamos con el intermediario,
+
 ```console
 luis @ idefix ➜  ~  ssh coder-via-internet
 luis@coder:~$
 ```
 
-En el caso de querer mapear el puerto (no necesitas la Shell): 
+Otra opcion es usar la opción `-N` que evita abrir una sheel contra el intermediario. 
 
 ```console
 luis @ idefix ➜  ~  ssh -N coder-via-internet
@@ -188,7 +187,7 @@ luis @ idefix ➜  ~  ssh -N coder-via-internet
 
 **Conectar con Jupyter Lab**
 
-En este caso tendrás acceso vía: 
+En ambos casos tendrás acceso vía: 
 
 - http://127.0.0.1:8001
 
