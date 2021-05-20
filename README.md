@@ -140,11 +140,12 @@ A partir de ahora ya puedes conectar con los servicios de esta máquina virtual.
 - http://127.0.0.1:8001
 - http://mi-ordernador.dominio.local:8001
   
-
+<br/>
 
 ### Conexión al HOST por internet vía SSH 
 
-Un caso típico es conectar a tu HOST vía un servidor intermedia con SSH. Supongamos el siguiente caso: 
+Una situación que puede ser muy típica es que quieras conectar con tu HOST desde internet. Normalmente estará "protegido" detrás de un firewall por lo que no es sencillo acceder a él. Lo normal es acceder a un equipo intermedio vía SSH que sí tenga acceso a través de la LAN privada. Sería algo así: 
+
 
 ```config
                                                  ┌─┬────────────┬─┐
@@ -153,9 +154,9 @@ Un caso típico es conectar a tu HOST vía un servidor intermedia con SSH. Supon
                                                  │ │ coder VM   │ │
                                                  │ │            │ │
 ┌──────────┐               ┌───────────┐         │ └────────────┘ │
-│          │   INTERNET    │           │  LOCAL  │                │
+│          │   INTERNET    │           │  LAN    │                │
 │ Cliente  ├──────────────►│ SSHServer ├───────► │  KVM HOST      │
-│          │               │           │  LAN    │                │
+│          │               │           │  LOCAL  │                │
 └──────────┘               └───────────┘         └────────────────┘
                        miserver.midom.org           192.168.1.13
 
