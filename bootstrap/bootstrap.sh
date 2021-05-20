@@ -224,7 +224,12 @@ function instalarDocker {
 function instalarPaquetesPython_LocalUser {
     echo "Python: Creando el entorno virtual..."
 
-    virtualenv -p /usr/bin/python3 ~/venv
+    ## PENDIENTE !!!.
+    ###
+    ## Activo entorno con la versión 3.6. Ver la nota 
+    ## de la función "instalarPython3.6" más abajo...
+    ###
+    virtualenv -p /usr/bin/python3.6 ~/venv
     source ~/venv/bin/activate
 
     echo "Python: Instalando paquetes adicionales"
@@ -287,6 +292,26 @@ configuraBienvenida() {
 }
 
 
+# PENDIENTES DE VERIFICAR. Necesito Python 3.6 para que funcionen un 
+# par de cosas: 
+#   - Riak python library
+#       TypeError: namedtuple() got an unexpected keyword argument 'verbose'
+#   - py2neo
+#       RuntimeError: dictionary keys changed during iteration
+#
+function instalarPython3.6 {
+    echo "Instalar python 3.6 ..."
+
+    # http://lavatechtechnology.com/post/install-python-35-36-and-37-on-ubuntu-2004/
+
+    add-apt-repository -y ppa:deadsnakes/ppa
+    apt -qq update
+    apt install -y python3.6 python3.6-dev
+
+}
+
+
+
 #
 # Función principal
 #
@@ -302,6 +327,7 @@ main() {
     addLocalUser
     instalarPaquetes
     instalarNodeJs
+    instalarPython3.6
     instalarDocker
     instalarPaquetesPython
     instalarJupyterLabExtensions
