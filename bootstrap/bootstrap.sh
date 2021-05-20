@@ -119,18 +119,25 @@ function addLocalUser {
     # Cambio la contraseña del usuario. 
     echo "${CONF_usuario}:${CONF_password}" | chpasswd -e
 
-    #rsync --archive --chown=$LOCAL_USER:$LOCAL_USER $ACTUAL_DIR/resources/localuser/home/ /home/$LOCAL_USER
-    #rsync --archive --chown=$LOCAL_USER:$LOCAL_USER ~/.ssh /home/$LOCAL_USER
+    # Preparo alias para posible integración con proyecto de BBDD NoSQL
+    echo "# NoSQL alias" >> /home/${CONF_usuario}/.bashrc
+    echo 'alias postgres="docker-compose -f /opt/compose/compose-postgres/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
+    echo 'alias riak="docker-compose -f /opt/compose/compose-riak/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
+    echo 'alias riak-admin="docker exec -it compose-riak_coordinator_1 riak-admin"' >> /home/${CONF_usuario}/.bashrc
+    echo 'alias cassandra="docker-compose -f /opt/compose/compose-cassandra/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
+    echo 'alias mongo="docker-compose -f /opt/compose/compose-mongodb/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
+    echo 'alias neo4j="docker-compose -f /opt/compose/compose-neo4j/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
 
-    #cat $ACTUAL_DIR/resources/localuser/profile/bashrc >> /home/$LOCAL_USER/.bashrc
-   
+    # Habilito que tu usuario pueda trabajar con sudo
     usermod -aG sudo ${CONF_usuario}
     echo  "${CONF_usuario} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${CONF_usuario}
 
-    #mkdir -p /opt/compose
-    #chown $LOCAL_USER:$LOCAL_USER /opt/compose
+    # Preparo el directorio donde irá docker
+    mkdir -p /opt/compose
+    chown ${CONF_usuario}:${CONF_usuario} /opt/compose
 
-    su - ${CONF_usuario} -c "mkdir ~/notebooks; touch ~/notebooks/.install"
+    # Creo el directorio donde sugiero instalarse los notbooks
+    su - ${CONF_usuario} -c "mkdir ~/notebooks"
 
     #
     # Una vez que he copiado la clave pública me aseguro que
