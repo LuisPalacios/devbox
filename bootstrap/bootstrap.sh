@@ -229,7 +229,8 @@ function instalarPaquetesPython_LocalUser {
     ## Activo entorno con la versión 3.6. Ver la nota 
     ## de la función "instalarPython3.6" más abajo...
     ###
-    virtualenv -p /usr/bin/python3.6 ~/venv
+    #virtualenv -p /usr/bin/python3.6 ~/venv
+    virtualenv -p /usr/bin/python3 ~/venv
     source ~/venv/bin/activate
 
     echo "Python: Instalando paquetes adicionales"
@@ -327,7 +328,7 @@ main() {
     addLocalUser
     instalarPaquetes
     instalarNodeJs
-    instalarPython3.6
+    #instalarPython3.6
     instalarDocker
     instalarPaquetesPython
     instalarJupyterLabExtensions
