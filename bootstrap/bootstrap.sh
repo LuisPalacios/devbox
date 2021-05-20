@@ -8,7 +8,7 @@
 export TERM=vt100
 export BOOTSTRAP_DIR="/vagrant/bootstrap"
 export BOOTSTRAP_YAML=${BOOTSTRAP_DIR}"/bootstrap.yaml"
-export BOOTSTRAP_KEYS=${BOOTSTRAP_DIR}"/bootstrap.keys"
+export BOOTSTRAP_KEYS=${BOOTSTRAP_DIR}"/public-keys.txt"
 
 # Mostrar por dónde vamos...
 step=1
@@ -62,6 +62,23 @@ function compruebaLinux {
         exit 1
     fi
 }
+
+# Cambia la consola a modo text exclusivamente
+# Así evitamos cualquier posible "flickering" en VirtualBox
+function configuraGrub {
+    step "Cambio Grub para tener una consola pura en modo texto"
+    
+    # Añado:  "quiet splash nomodeset" al final de GRUB_CMDLINE_LINUX_DEFAULT
+    sed -ie '/^.*GRUB_CMDLINE_LINUX_DEFAULT/s/"$/ quiet splash nomodeset"/' /etc/default/grub
+
+    # Descomento la línea:  GRUB_TERMINAL=console
+    sed -ie '/^#.*GRUB_TERMINAL/s/^#//' /etc/default/grub
+
+    # Fijo la configuración
+    update-grub
+}
+
+
 
 #
 # Estoy en Madrid
@@ -205,7 +222,7 @@ function instalarPaquetesPython_LocalUser {
 
     echo "Python: Instalando paquetes adicionales"
     pip install -U pip setuptools
-    pip install --no-cache-dir -r ${BOOTSTRAP_DIR}/bootstrap.req.python    
+    pip install --no-cache-dir -r ${BOOTSTRAP_DIR}/requirements.txt    
 }
 
 function instalarPaquetesPython {
@@ -270,6 +287,7 @@ main() {
 
     leeConfigYAML
     compruebaLinux
+    configuraGrub
     configuraTimezone
     configuraTeclado
     configuraLocale

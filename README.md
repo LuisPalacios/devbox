@@ -1,20 +1,8 @@
 # Developer Box
 
-Este repositorio contiene todo lo necesario para crearte una máquina virtual utilizando `Vagrant`. Está preparada para funcionar con los proveedores VirtualBox o KVM.
+Este repositorio contiene todo lo necesario para crear, usando [Vagrant](https://www.vagrantup.com/), una máquina virtual orientada al Desarrollo de Software. Está configurada para funcionar con los proveedores VirtualBox o KVM. Además podrá utilizarse para conectar con servicios adicionales de Bases de Datos, cuadernos Jupyter de ejercicios, etc... (mira al final de este README)
 
-Además podrá utilizarse para conectar con servicios adicionales, aunque esa parte está todavía Work-In-Progress...
-
-* [Servicios Jupyter-Labs](https://github.com/LuisPalacios/devbox-db-jupyterlabs)
-
-- JupyterLabs
-
-* [Servicios de bases de datos](https://github.com/LuisPalacios/devbox-db-services)
-
-- Postgres
-- Riak
-- Cassandra
-- Mongodb
-- Neo4j
+<br/>
 
 ## Instalación
 
@@ -25,10 +13,10 @@ git clone https://github.com/LuisPalacios/devbox.git
 cd devbox
 ```
 
-* Pega la(s) clave(s) pública SSH de tu ordenador cliente al fichero `bootstrap/bootstrap.keys` (mira el ejemplo a continuación).
+* Pega la(s) clave(s) pública SSH de tu ordenador cliente al fichero `bootstrap/public-keys.txt` (mira el ejemplo a continuación).
 
 ```
-cat ~/.ssh/id_rsa.pub >> bootstrap/bootstrap.keys
+cat ~/.ssh/id_rsa.pub >> bootstrap/public-keys.txt
 ```
 
 * A continuación revisa el fichero `bootstrap/bootstrap.yaml` y adáptalo a tus necesidades.
@@ -119,11 +107,27 @@ Una vez que has abierto una sesión SSH se activa el forwarding de puertos, por 
 
 <br/>
 
-### Proyecto relacionados.
+## Proyecto relacionados.
 
-* Instalarte el [Taller BBDD](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Entra en tu VM vía SSH con tu usuario y ejecuta el comando `curl` que puedes ver en el siguiente ejemplo:
+Para poder sacarle provecho a esta máquina virtual necesitarás contenido. Aquí tienes una lista de proyectos que puedes usar para dotar de contenido a tu máquina virtual. 
+
+* Descarga el [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo.
 
 ```console
  $ ssh luis@coder
  $ curl -s https://raw.githubusercontent.com/dvillaj/NoSQL-Services/master/scripts/setup.sh | bash
 ```
+
+ 
+ * [Servicios Jupyter-Labs](https://github.com/LuisPalacios/devbox-db-jupyterlabs)
+
+- JupyterLabs
+
+* [Servicios de bases de datos](https://github.com/LuisPalacios/devbox-db-services)
+
+- Postgres
+- Riak
+- Cassandra
+- Mongodb
+- Neo4j
+
