@@ -240,6 +240,7 @@ function instalarPaquetesPython_LocalUser {
     pip install numpy
     pip install pandas
     pip install matplotlib
+    pip install seaborn
     pip install xlrd
     pip install xlwt
     pip install openpyxl
