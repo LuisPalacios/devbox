@@ -235,7 +235,34 @@ function instalarPaquetesPython_LocalUser {
 
     echo "Python: Instalando paquetes adicionales"
     pip install -U pip setuptools
-    pip install --no-cache-dir -r ${BOOTSTRAP_DIR}/requirements.txt    
+    # pip install --no-cache-dir -r ${BOOTSTRAP_DIR}/requirements.txt   
+    pip install py2neo
+    pip install numpy
+    pip install pandas
+    pip install matplotlib
+    pip install xlrd
+    pip install xlwt
+    pip install openpyxl
+    pip install bottle
+    pip install Faker
+    pip install wordcloud
+    pip install pprintpp
+    pip install psycopg2-binary
+    pip install sqlalchemy
+    pip install ipython-sql
+    pip install prettytable
+    pip install riak
+    pip install pymongo
+    pip install ipython-cypher
+    pip install networkx
+    pip install cassandra-driver
+    pip install git+https://github.com/dvillaj/ipython-cql.git
+    pip install jupyterlab
+    pip install jupyterlab-git
+    pip install jupyterlab-drawio
+    pip install lckr-jupyterlab-variableinspector
+    pip install jupyter_nbextensions_configurator
+    pip install jupyter_contrib_nbextensions
 }
 
 function instalarPaquetesPython {
