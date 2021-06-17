@@ -13,7 +13,7 @@ PubkeyAuthentication yes
 PasswordAuthentication no
 AuthenticationMethods publickey
 ChallengeResponseAuthentication no
-UsePAM no
+UsePAM yes
 AllowAgentForwarding yes
 AllowTcpForwarding yes
 GatewayPorts yes
