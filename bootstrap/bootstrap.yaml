@@ -3,14 +3,18 @@
 # Fichero de parametrización de la máquina Virtual
 #
 
-# Nombre del usuario con el que trabajarás en la VM
-# Genera la contraseña en un linux con:
-#   openssl passwd -6 -salt xyz <escribe_aquí_la_contraseña>
-#   Copia/pega el resultado en el campo password: más abajo (deja un espacio detrás de los ':')
-# Durante el proceso de bootstrap cambiaré la constraseña con:
-#   echo usuario:password | chpasswd -e
+# Usuario/contraseña con el que trabajarás en la VM
+#
+# Genera la contraseña con: 
+#    LINUX: 
+#      openssl passwd -6 -salt xyz <escribe_aquí_la_contraseña>
+#    MACOS (openssl instalado con Homebrew)
+#      /usr/local/opt/openssl/bin/openssl passwd -6 -salt xyz <escribe_aquí_la_contraseña>
+# Copia/pega el resultado en el campo password: más abajo (deja un espacio detrás de los ':')
 #
 usuario: luis
+# En este ejemplo use "developer" como contraseña,
+# openssl passwd -6 -salt xyz developer
 password: $6$xyz$XjeexdX/3/PyM3qe0uxvvUrR4QnpwaeANARczNd6WDCazT1PrP9lgsvNzFWqr.4ri8mOsHWqH29t4xKE915oA0
 
 # Nombre del box Vagrant
