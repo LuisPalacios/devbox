@@ -8,9 +8,9 @@
 # Ejemplos:
 #  
 #  Permitir a tu ordenador:
-#  cat ~/.ssh/id_rsa.pub >> bootstrap/public-keys.keys
+#  cat ~/.ssh/id_rsa.pub >> bootstrap/public-keys.txt
 #
 #  Permitir a todos a los que ya estás permitiendo en tu ordenador: 
-#  cat ~/.ssh/authorized_keys >> bootstrap/public-keys.keys
+#  cat ~/.ssh/authorized_keys >> bootstrap/public-keys.txt
 #
 #
