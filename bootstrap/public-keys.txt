@@ -6,9 +6,11 @@
 # este fichero antes de arrancar la máquina virtual con `vagrant up`
 #
 # Ejemplos:
+#  
+#  Permitir a tu ordenador:
+#  cat ~/.ssh/id_rsa.pub >> bootstrap/public-keys.keys
 #
-#  cat ~/.ssh/id_rsa.pub >> bootstrap/bootstrap.keys
-#  cat ~/.ssh/authorized_keys >> bootstrap/bootstrap.keys
+#  Permitir a todos a los que ya estás permitiendo en tu ordenador: 
+#  cat ~/.ssh/authorized_keys >> bootstrap/public-keys.keys
 #
 #
-

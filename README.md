@@ -28,7 +28,7 @@ Vagrant es una utilidad de línea de comandos que permite gestionar el ciclo de 
 
 ## Instalación de la VM
 
-Clona este repositorio en un ordenador donde tengas VirtualBox (Windows, Linux, MacOS,Solaris), Parallels (MacOS) o KVM (Libvirt en Linux).
+Clona este repositorio en un ordenador donde tengas VirtualBox (Windows, Linux, MacOS,Solaris), Parallels Desktop (MacOS) o KVM (Libvirt en Linux).
 
 ```
 git clone https://github.com/LuisPalacios/devbox.git
