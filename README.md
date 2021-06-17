@@ -1,27 +1,47 @@
 # Developer Box
 
-Este repositorio contiene todo lo necesario para crear, usando [Vagrant](https://www.vagrantup.com/), una máquina virtual orientada al Desarrollo de Software. Está configurada para funcionar con los proveedores VirtualBox o KVM. Además podrá utilizarse para conectar con servicios adicionales de Bases de Datos, cuadernos Jupyter de ejercicios, etc... (mira al final de este README). 
+Este repositorio contiene todo lo necesario para crear una máquina virtual (VM: Virtual Machine) con [Vagrant](https://www.vagrantup.com/). Esta VM en particular está orientada al Desarrollo de Software con Python y [JupyterLabs](https://jupyter.org/). 
 
-El repositorio está basado en [NoSQL-box](https://github.com/dvillaj/NoSQL-box) de Daniel Villanueva, con modificaciones y literatura adicional que he añadido. 
+
+El repositorio está basado en [NoSQL-box](https://github.com/dvillaj/NoSQL-box) de Daniel Villanueva, con modificaciones y literatura adicional que he añadido. Podrás utilizar esta VM para conectar con servicios adicionales de Bases de Datos, cuadernos Jupyter de ejercicios. Más información al final de este README.
 
 <br/>
 
-## Instalación
+## Preparar Vagrant y el Proveedor
 
-Clona este repositorio en un ordenador donde tengas VirtualBox o KVM (Libvirt).
+Vagrant es una utilidad de línea de comandos que permite gestionar el ciclo de vida de las máquinas virtuales. Necesitas instalar un Software de Vrtualización, el propio Vagrant y conectar ambos entre sí con un Proveedor. El `Vagrantfile` de este repositorio está preparado para trabajar con los proveedores VirtualBox, Parallels o KVM. 
+
+- (1) Software de Virtualización, te paso algunos enlaces: 
+  - Guía oficial sobre la [instalación de VirtualBox](https://www.virtualbox.org/wiki/Downloads). 
+  - Si usas Parallels Desktop, aquí está [su documentación](https://www.parallels.com/es/products/desktop/download-documents/) para instalarlo.
+  - En el caso de KVM/libvirt hay cientos de referencias en internet. Aquí tienes mi [apunte técnico sobre la instalación de KVM y Vagrant](https://www.luispa.com/virtualizaci%C3%B3n/2021/05/15/vagrant-kvm.html)
+- (2) Instalación de Vagrant: Sigue la [guía oficial de instalación de Vagrant](https://www.vagrantup.com/docs). Puedes instalarlo en Linux, MacOS, Windows...
+- (3) Proveedor: 
+  - **Proveedor para VirtualBox**: Vagrant trae soporte nativo para VirtualBox, por lo tanto no necesitas hacer nada especial. 
+  - **Proveedor para Parallels Desktop**: En [este sitio](https://parallels.github.io/vagrant-parallels/docs/) documentan cómo Vagrant puede usar las máquinas virtuales basadas en Parallels Desktop para Mac. Es sencillísimo: 
+    - Instalación: `$ vagrant plugin install vagrant-parallels`
+    - Actualización: `$ vagrant plugin update vagrant-parallels`
+    - Uso: `$ vagrant up` o si tienes multi-proveedor `$ vagrant up --provider=parallels`
+  - **Proveedor para KVM/libvirt**: Cada distribución de Linux tiene sus peculiaridades, así que lo mejor es que busques los manuales de la tuya. En mi [apunte técnico sobre la instalación de KVM y Vagrant](https://www.luispa.com/virtualizaci%C3%B3n/2021/05/15/vagrant-kvm.html) describo cómo lo instalé en un Ubuntu 20.10 (Groovy Gorilla). 
+
+<br/>
+
+## Instalación de la VM
+
+Clona este repositorio en un ordenador donde tengas VirtualBox (Windows, Linux, MacOS,Solaris), Parallels (MacOS) o KVM (Libvirt en Linux).
 
 ```
 git clone https://github.com/LuisPalacios/devbox.git
 cd devbox
 ```
 
-* Pega la(s) clave(s) pública SSH de tu ordenador cliente al fichero `bootstrap/public-keys.txt` (mira el ejemplo a continuación).
+* Pega la(s) clave(s) pública SSH de tu ordenador cliente al fichero `bootstrap/public-keys.txt`:
 
 ```
 cat ~/.ssh/id_rsa.pub >> bootstrap/public-keys.txt
 ```
 
-* A continuación revisa el fichero `bootstrap/bootstrap.yaml` y adáptalo a tus necesidades.
+* Revisa el fichero `bootstrap/bootstrap.yaml` y adáptalo a tus necesidades. Dentro del fichero tienes instrucciones para generar la contraseña de tu usuario.
 
 ```config
 usuario: luis
@@ -32,7 +52,7 @@ timezone: 'Europe/Madrid'
 teclado: 'es'
 ```
 
-* Por último ya puedes arrancar la máquina virtual:
+* Arranca la máquina virtual:
 
 ```console
 luis@jupiter:~/devbox$ vagrant up
@@ -92,7 +112,7 @@ luis@coder:~$
 
 **Conectar con Jupyter Lab**
 
-Conecto con JupyterLab desde la red LAN (o incluso en local). En mi ejemplo utilicé la IP 192.168.1.13 en la sección `override.vm.network "public_network"` del `Vagrantfile`: 
+Lo normal es conectar desde tu red LAN o desde el mismo equipo donde la has instalado (por ejemplo en un Mac con VirtualBox). En el siguiente ejemplo utilicé la IP 192.168.1.13 en la sección `override.vm.network "public_network"` del `Vagrantfile`: 
 
 - http://127.0.0.1:8001
 - http://192.168.1.13:8001

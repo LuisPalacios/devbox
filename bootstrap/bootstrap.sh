@@ -283,7 +283,6 @@ function instalarJupyterLabExtensions_LocalUser {
     jupyter nbextensions_configurator enable --user
     jupyter lab build
 }
-
 function instalarJupyterLabExtensions {
     export -f instalarJupyterLabExtensions_LocalUser
     su ${CONF_usuario} -c "bash -c instalarJupyterLabExtensions_LocalUser"
@@ -306,6 +305,24 @@ function servicioJupyterLab {
     systemctl daemon-reload
     systemctl enable jupyter.service
     systemctl start jupyter.service
+}
+
+# Instalo Kite. Lleva el auto-completar al siguiente nivel 
+#
+function instalarKite_LocalUser {
+    echo "Instalo Kite ..."
+
+    loginctl enable-linger luis
+    wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
+    chmod a+x ./kite-installer.sh
+    bash ./kite-installer.sh --download
+    bash ./kite-installer.sh --install
+    rm -f ./kite-installer.sh
+}
+function instalarKite {
+    export -f instalarKite_LocalUser
+    su ${CONF_usuario} -c "bash -c instalarKite_LocalUser"
+
 }
 
 #
@@ -361,6 +378,7 @@ main() {
     instalarPaquetesPython
     instalarJupyterLabExtensions
     servicioJupyterLab
+    instalarKite
     configuraBienvenida
 }
 

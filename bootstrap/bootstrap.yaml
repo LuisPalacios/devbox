@@ -1,11 +1,12 @@
 ---
 
-# Nombre del usuario de tu VM
+# Fichero de parametrización de la máquina Virtual
 #
+
+# Nombre del usuario con el que trabajarás en la VM
 # Genera la contraseña en un linux con:
 #   openssl passwd -6 -salt xyz <escribe_aquí_la_contraseña>
 #   Copia/pega el resultado en el campo password: más abajo (deja un espacio detrás de los ':')
-#
 # Durante el proceso de bootstrap cambiaré la constraseña con:
 #   echo usuario:password | chpasswd -e
 #
