@@ -79,17 +79,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       # Forwarding solo si la VM está en VirtualBox
       # en mi propio ordenador desktop (mac o windows)
-      prl.vm.network :forwarded_port, guest:  7687, host:  7687, id: 'bolt'
-      prl.vm.network :forwarded_port, guest:  8082, host:  8082, id: 'bottle'
-      prl.vm.network :forwarded_port, guest:  8001, host:  8001, id: 'jupyter'
-      prl.vm.network :forwarded_port, guest: 27017, host: 27017, id: 'mongod'
-      prl.vm.network :forwarded_port, guest:  3100, host:  3100, id: 'mongoku'
-      prl.vm.network :forwarded_port, guest:  7474, host:  7474, id: 'neo4j'
-      prl.vm.network :forwarded_port, guest:  5432, host:  5432, id: 'postgres'
-      prl.vm.network :forwarded_port, guest:  5050, host:  5050, id: 'pgadmin'
-      prl.vm.network :forwarded_port, guest:  8087, host:  8087, id: 'riak-protocol-buffer'
-      prl.vm.network :forwarded_port, guest:  8098, host:  8098, id: 'riak-http'
-      prl.vm.network :forwarded_port, guest:    22, host:  2222, id: 'ssh'
+      override.vm.network :forwarded_port, guest:  7687, host:  7687, id: 'bolt'
+      override.vm.network :forwarded_port, guest:  8082, host:  8082, id: 'bottle'
+      override.vm.network :forwarded_port, guest:  8001, host:  8001, id: 'jupyter'
+      override.vm.network :forwarded_port, guest: 27017, host: 27017, id: 'mongod'
+      override.vm.network :forwarded_port, guest:  3100, host:  3100, id: 'mongoku'
+      override.vm.network :forwarded_port, guest:  7474, host:  7474, id: 'neo4j'
+      override.vm.network :forwarded_port, guest:  5432, host:  5432, id: 'postgres'
+      override.vm.network :forwarded_port, guest:  5050, host:  5050, id: 'pgadmin'
+      override.vm.network :forwarded_port, guest:  8087, host:  8087, id: 'riak-protocol-buffer'
+      override.vm.network :forwarded_port, guest:  8098, host:  8098, id: 'riak-http'
+      override.vm.network :forwarded_port, guest:    22, host:  2222, id: 'ssh'
     end
 
     # Incorporo el fichero de claves públicas SSH de este usuario del Host
