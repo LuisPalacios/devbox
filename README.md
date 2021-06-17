@@ -56,6 +56,11 @@ teclado: 'es'
 
 ```console
 luis@jupiter:~/devbox$ vagrant up
+
+
+# Si estás en un MacOS con multiproveedor: 
+
+luis@jupiter:~/devbox$ vagrant up --provider=parallels   
 ```
 
 <br/>
