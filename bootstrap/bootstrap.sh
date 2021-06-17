@@ -313,7 +313,11 @@ function instalarKite_LocalUser {
     echo "Instalo Kite ..."
 
     cd /home/${CONF_usuario}
+    
+    # Habilito el lingering
     loginctl enable-linger luis
+    # Puedo comprobar con ls /var/lib/systemd/linger/
+
     wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
     chmod a+x ./kite-installer.sh
     bash ./kite-installer.sh --download

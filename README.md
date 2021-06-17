@@ -63,6 +63,27 @@ luis@jupiter:~/devbox$ vagrant up
 luis@jupiter:~/devbox$ vagrant up --provider=parallels   
 ```
 
+* Conecta con `vagrant ssh`
+  
+```console
+luis @ idefix $ vagrant ssh
+vagrant@coder:~$
+vagrant@coder:~$ sudo su - luis
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ _______________________________
+< Bienvenido a mi servidor luis >
+ -------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+luis@coder:~$
+```
+
 <br/>
 
 ## SSH 
