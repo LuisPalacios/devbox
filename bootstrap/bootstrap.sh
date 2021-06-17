@@ -99,7 +99,7 @@ function configuraTimezone {
 function configuraTeclado {
     step "Configurando el teclado"
 
-    sed -ie '/^XKBLAYOUT=/s/".*"/"${CONF_teclado}"/' /etc/default/keyboard
+    sed -i 's/XKBLAYOUT=\".*"/XKBLAYOUT=\"'${CONF_teclado}'\"/g' /etc/default/keyboard
     if [ ! $? -eq 0 ]
     then
         echo "AVISO: Configurando el teclado"
@@ -312,6 +312,7 @@ function servicioJupyterLab {
 function instalarKite_LocalUser {
     echo "Instalo Kite ..."
 
+    cd /home/${CONF_usuario}
     loginctl enable-linger luis
     wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
     chmod a+x ./kite-installer.sh

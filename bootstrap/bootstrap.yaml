@@ -23,6 +23,11 @@ boxname: 'generic/ubuntu2010'
 # Nombre del equipo
 hostname: 'coder'
 
+# Nombre del Host Linux. 
+# Este parámetro solo lo necesitas si tu HOST es KVM/libvirt. 
+# Poner aquí el nombre de tu host linux
+linuxhost: 'jupiter'
+
 # Timezone
 timezone: 'Europe/Madrid'
 
