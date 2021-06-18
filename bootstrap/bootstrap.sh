@@ -264,6 +264,7 @@ function instalarPaquetesPython_LocalUser {
     pip install lckr-jupyterlab-variableinspector
     pip install jupyter_nbextensions_configurator
     pip install jupyter_contrib_nbextensions
+
 }
 
 function instalarPaquetesPython {
@@ -282,11 +283,14 @@ function instalarJupyterLabExtensions_LocalUser {
     jupyter contrib nbextension install --user
     jupyter nbextensions_configurator enable --user
     jupyter lab build
+
+    # Añado kite
+    pip install "jupyterlab-kite>=2.0.2"
+
 }
 function instalarJupyterLabExtensions {
     export -f instalarJupyterLabExtensions_LocalUser
     su ${CONF_usuario} -c "bash -c instalarJupyterLabExtensions_LocalUser"
-
 }
 
 #
@@ -323,6 +327,11 @@ function instalarKite_LocalUser {
     bash ./kite-installer.sh --download
     bash ./kite-installer.sh --install
     rm -f ./kite-installer.sh
+
+    systemctl daemon-reload
+    systemctl --user enable /home/luis/.config/systemd/user/kite-autostart.service
+    systemctl --user enable /home/luis/.config/systemd/user/kite-updater.timer
+    
 }
 function instalarKite {
     export -f instalarKite_LocalUser
