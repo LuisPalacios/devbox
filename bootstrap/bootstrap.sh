@@ -284,9 +284,6 @@ function instalarJupyterLabExtensions_LocalUser {
     jupyter nbextensions_configurator enable --user
     jupyter lab build
 
-    # Añado kite
-    pip install "jupyterlab-kite>=2.0.2"
-
 }
 function instalarJupyterLabExtensions {
     export -f instalarJupyterLabExtensions_LocalUser
@@ -311,35 +308,8 @@ function servicioJupyterLab {
     systemctl start jupyter.service
 }
 
-# Instalo Kite. Lleva el auto-completar al siguiente nivel 
-#
-function instalarKite_LocalUser {
-    echo "Instalo Kite ..."
-
-    cd /home/${CONF_usuario}
-    
-    # Habilito el lingering
-    loginctl enable-linger luis
-    # Puedo comprobar con ls /var/lib/systemd/linger/
-
-    wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
-    chmod a+x ./kite-installer.sh
-    bash ./kite-installer.sh --download
-    bash ./kite-installer.sh --install
-    rm -f ./kite-installer.sh
-
-    systemctl daemon-reload
-    systemctl --user enable /home/luis/.config/systemd/user/kite-autostart.service
-    systemctl --user enable /home/luis/.config/systemd/user/kite-updater.timer
-    
-}
-function instalarKiteOLD {
-    export -f instalarKite_LocalUser
-    sudo -i -u ${CONF_usuario} "bash -c instalarKite_LocalUser"
-}
-
 function instalarKite {
-sudo -u "${CONF_usuario}" -i bash "${CONF_usuario}" <<'EOF_KITE'
+sudo -u "${CONF_usuario}" -i bash _ "${CONF_usuario}" <<'EOF_KITE'
     echo "Instalo Kite como usuario '${1}'"
     cd /home/${1}
     
@@ -358,6 +328,14 @@ sudo -u "${CONF_usuario}" -i bash "${CONF_usuario}" <<'EOF_KITE'
 EOF_KITE
 }
 
+#
+# Extension Kite para JupyterLabs
+#
+function instalarJupyterLabExtensionKite {
+    echo "Instalar la extension Kite para JupyterLab..."
+    source ~/venv/bin/activate
+    pip install "jupyterlab-kite>=2.0.2"
+}
 
 #
 # Cambio el mensaje de bienvenida en la shell
@@ -413,6 +391,7 @@ main() {
     instalarJupyterLabExtensions
     servicioJupyterLab
     instalarKite
+    instalarJupyterLabExtensionKite
     configuraBienvenida
 }
 
