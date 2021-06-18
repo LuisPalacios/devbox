@@ -339,9 +339,9 @@ function instalarKiteOLD {
 }
 
 function instalarKite {
-sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<'EOF_KITE'
-     echo "Instalo Kite ..."
-    cd /home/${1}
+sudo -u "${CONF_usuario}" -i env CONF_usuario="${CONF_usuario}" bash <<'EOF_KITE'
+    echo "Instalo Kite ..."
+    cd /home/${CONF_usuario}
     
     loginctl enable-linger luis
 
@@ -352,8 +352,8 @@ sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<'EOF_KITE'
     rm -f ./kite-installer.sh
 
     systemctl daemon-reload
-    systemctl --user enable /home/${1}/.config/systemd/user/kite-autostart.service
-    systemctl --user enable /home/${1}/.config/systemd/user/kite-updater.timer
+    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
+    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer
 
 EOF_KITE
 }
