@@ -130,7 +130,7 @@ function addLocalUser {
 
     # Para que funcione systemctl --user (necesario para Kite)
     # Test: sudo -u ${CONF_usuario} -i systemctl --user status
-    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}/.profile
+    echo 'if [ "x$XDG_RUNTIME_DIR" = "x" ]; then export XDG_RUNTIME_DIR=/run/user/$(id -u); fi' >> /home/${CONF_usuario}/.profile
 
     # Habilito que tu usuario pueda trabajar con sudo
     usermod -aG sudo ${CONF_usuario}
