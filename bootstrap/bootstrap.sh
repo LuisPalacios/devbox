@@ -340,15 +340,15 @@ function instalarKiteOLD {
 
 function instalarKite {
 sudo -u "${CONF_usuario}" -i bash "${CONF_usuario}" <<'EOF_KITE'
-     echo "Instalo Kite ..."
+    echo "Instalo Kite como usuario '${1}'"
     cd /home/${1}
     
     loginctl enable-linger luis
 
     wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
     chmod a+x ./kite-installer.sh
-    bash ./kite-installer.sh --download
-    bash ./kite-installer.sh --install
+    bash ./kite-installer.sh --download > /dev/null
+    bash ./kite-installer.sh --install > /dev/null
     rm -f ./kite-installer.sh
 
     systemctl daemon-reload
