@@ -335,8 +335,7 @@ function instalarKite_LocalUser {
 }
 function instalarKite {
     export -f instalarKite_LocalUser
-    su ${CONF_usuario} -c "bash -c instalarKite_LocalUser"
-
+    sudo -i -u ${CONF_usuario} "bash -c instalarKite_LocalUser"
 }
 
 #
