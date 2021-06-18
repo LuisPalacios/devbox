@@ -128,6 +128,10 @@ function addLocalUser {
     echo 'alias mongo="docker-compose -f /opt/compose/compose-mongodb/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
     echo 'alias neo4j="docker-compose -f /opt/compose/compose-neo4j/docker-compose.yml"' >> /home/${CONF_usuario}/.bashrc
 
+    # Para que funcione systemctl --user (necesario para Kite)
+    # Test: sudo -u ${CONF_usuario} -i systemctl --user status
+    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}/.profile
+
     # Habilito que tu usuario pueda trabajar con sudo
     usermod -aG sudo ${CONF_usuario}
     echo  "${CONF_usuario} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${CONF_usuario}
@@ -311,10 +315,6 @@ function servicioJupyterLab {
 function instalarKite {
     echo "Instalo Kite Engine"
     
-    # Para que funcione systemctl
-    # Test: sudo -u luis -i systemctl --user status
-    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}/.profile
-
 sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
     echo "Instalo Kite Engine como usuario '${CONF_usuario}'"
