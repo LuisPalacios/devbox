@@ -333,10 +333,31 @@ function instalarKite_LocalUser {
     systemctl --user enable /home/luis/.config/systemd/user/kite-updater.timer
     
 }
-function instalarKite {
+function instalarKiteOLD {
     export -f instalarKite_LocalUser
     sudo -i -u ${CONF_usuario} "bash -c instalarKite_LocalUser"
 }
+
+function instalarKite {
+sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<'EOF_KITE'
+     echo "Instalo Kite ..."
+    cd /home/${1}
+    
+    loginctl enable-linger luis
+
+    wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
+    chmod a+x ./kite-installer.sh
+    bash ./kite-installer.sh --download
+    bash ./kite-installer.sh --install
+    rm -f ./kite-installer.sh
+
+    systemctl daemon-reload
+    systemctl --user enable /home/${1}/.config/systemd/user/kite-autostart.service
+    systemctl --user enable /home/${1}/.config/systemd/user/kite-updater.timer
+
+EOF_KITE
+}
+
 
 #
 # Cambio el mensaje de bienvenida en la shell
