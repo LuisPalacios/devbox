@@ -310,8 +310,7 @@ function servicioJupyterLab {
 
 function instalarKite {
     echo "Instalo Kite Engine"
-
-#sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<EOF_KITE
+    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}
 
 sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
