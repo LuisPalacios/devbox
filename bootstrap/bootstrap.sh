@@ -313,7 +313,7 @@ function instalarKite {
     
     # Para que funcione systemctl
     # Test: sudo -u luis -i systemctl --user status
-    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}
+    echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> /home/${CONF_usuario}/.profile
 
 sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
