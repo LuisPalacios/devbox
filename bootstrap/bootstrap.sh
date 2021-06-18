@@ -311,12 +311,14 @@ function servicioJupyterLab {
 function instalarKite {
     echo "Instalo Kite Engine"
 
-sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<'EOF_KITE'
+#sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<EOF_KITE
 
-    echo "Instalo Kite Engine como usuario '${1}'"
-    cd /home/${1}
+sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
+
+    echo "Instalo Kite Engine como usuario '${CONF_usuario}'"
+    cd /home/${CONF_usuario}
     
-    loginctl enable-linger luis
+    loginctl enable-linger ${CONF_usuario}
     
     wget -q https://linux.kite.com/dls/linux/current -O kite-installer.sh
     
@@ -326,8 +328,8 @@ sudo -u "${CONF_usuario}" -i bash  _ "${CONF_usuario}" <<'EOF_KITE'
     rm -f ./kite-installer.sh
     
     systemctl daemon-reload
-    systemctl --user enable /home/${1}/.config/systemd/user/kite-autostart.service
-    systemctl --user enable /home/${1}/.config/systemd/user/kite-updater.timer
+    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
+    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer
     
 EOF_KITE
 
