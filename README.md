@@ -63,7 +63,7 @@ luis@jupiter:~/devbox$ vagrant up
 luis@jupiter:~/devbox$ vagrant up --provider=parallels   
 ```
 
-* Conecta con `vagrant ssh`
+* Conecta con `vagrant ssh`. Esta opción siempre te va a funcionar, más adelante veremos más opciones.
   
 ```console
 luis @ idefix $ vagrant ssh
@@ -91,7 +91,8 @@ luis@coder:~$
 Nota sobre el Networking: El fichero `Vagrantfile` está preparado para configurar dos estrategias distintas dependiendo de quién sea tu proveedor (KVM o VirtualBox): 
 
 * VM en un HOST Linux con KVM/Libvirt - Uso networking público: Asigno una Dirección IP Fija a la VM 
-* VM en un HOST local con VirtualBox  - Uso networking prinvado: PORT FORWARDING
+* VM en un HOST local con VirtualBox  - Uso networking privado: PORT FORWARDING
+* VM en un HOST local con Parallels Desktop  - Uso networking privado: PORT FORWARDING
 
 <br/>
 
@@ -147,13 +148,13 @@ Lo normal es conectar desde tu red LAN o desde el mismo equipo donde la has inst
 
 ### HOST Mac (o Windows) con VirtualBox
 
-* Otro ejemplo, si lo monto en un Mac o un Windows, configuro el cliente SSH para conectar con la VirtualBox (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coder-local`.
+* Otro ejemplo, si lo monto en un Mac o un Windows, configuro el cliente SSH para conectar con la VirtualBox (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coder-vb`.
 
 ![VM en Virtualbox](vagrant-vb.png?raw=true "VM en Virtualbox")
 
 
 ```console
-Host coder-local
+Host coder-vb
   HostName 127.0.0.1
   User luis
   Port 2222
@@ -164,7 +165,7 @@ Host coder-local
 Si la estableciste, recuerda que la contraseña es la de tu clave pública/privada
 
 ```console
-luis @ idefix ➜  ~  ssh coderlocal
+luis @ idefix ➜  ~  ssh coder-vb
 Enter passphrase for key '/Users/luis/.ssh/id_rsa':
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
@@ -189,6 +190,54 @@ A partir de ahora ya puedes conectar con los servicios de esta máquina virtual.
 - http://mi-ordernador.dominio.local:8001
   
 <br/>
+
+
+### HOST con Parallels Desktop
+
+* En este caso he configurado un MacOS con Parallels Desktop como Host. Configuro el cliente SSH para conectar con la VM en Parallels (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coder-prl`.
+
+![VM en Parallels](vagrant-parl.png?raw=true "VM en Parallels Desktop")
+
+
+```console
+Host coder-prl
+  HostName 127.0.0.1
+  User luis
+  Port 2222
+```
+
+**Conecta vía SSH**
+
+Si la estableciste, recuerda que la contraseña es la de tu clave pública/privada
+
+```console
+luis @ idefix ➜  ~  ssh coder-prl
+Enter passphrase for key '/Users/luis/.ssh/id_rsa':
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ _______________________________
+< Bienvenido a mi servidor luis >
+ -------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+luis@coder:~$
+```
+
+**Conectar con Jupyter Lab**
+
+A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab, por lo tanto podrás acceder en local (desde tu propio ordenador). Si habilitaste la opcion de `networking público` deberías poder conectar desde la red LAN. 
+
+
+- http://127.0.0.1:8001
+- http://<IP en tu red lan>:8001
+  
+<br/>
+
 
 ### Conexión al HOST por internet vía SSH 
 
