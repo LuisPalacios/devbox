@@ -196,7 +196,7 @@ A partir de ahora ya puedes conectar con los servicios de esta máquina virtual.
 
 * En este caso he configurado un MacOS con Parallels Desktop como Host. Configuro el cliente SSH para conectar con la VM en Parallels (localhost). Configuro el fichero ~/.ssh/config del cliente y a esta opción la llamo `coder-prl`.
 
-![VM en Parallels](vagrant-parl.png?raw=true "VM en Parallels Desktop")
+![VM en Parallels](vagrant-prl.png?raw=true "VM en Parallels Desktop")
 
 
 ```console
