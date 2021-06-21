@@ -363,7 +363,7 @@ ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     systemctl --user start kite-autostart.service
     systemctl --user start kite-updater.timer 
     sleep 2
-    
+
     echo "Compruebo el estado de kit-autostart.service y kit-updater.timer"
     systemctl --user status kite-autostart.service
     systemctl --user status kite-updater.timer 
@@ -436,9 +436,9 @@ main() {
     instalarDocker
     instalarPaquetesPython
     instalarJupyterLabExtensions
-    servicioJupyterLab
-    instalarKite
     instalarJupyterLabExtensionKite
+    instalarKite
+    servicioJupyterLab
     configuraBienvenida
 }
 
