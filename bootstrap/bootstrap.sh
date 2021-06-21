@@ -327,10 +327,15 @@ function servicioJupyterLab {
     systemctl start jupyter.service
 }
 
+#
+# Para instalar KITE necesitamos poder ejecutar systemctl --user, por lo tanto necesito
+# entrar con "SSH" vs "SUDO/SU"
+# sudo/su - se emplean para cambiar la identidad del usuario, no fueron diseñadas para
+#           abrir una sesión de login interactivo completo de usuario. 
+# ssh - sí que ejecuta una sesión completa de usuario, por lo tanto systemctl --user funciona. 
+#
 function instalarKite {
     echo "Instalo Kite Engine"
-
-#sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
 ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     export CONF_usuario=$(id -un)
@@ -349,6 +354,9 @@ ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     systemctl daemon-reload
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
+    systemctl --user start /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
+    systemctl --user start /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
+    
 EOF
 }
 
@@ -362,6 +370,7 @@ sudo -u "${CONF_usuario}" -i bash <<EOF
     source ~/venv/bin/activate
     pip install "jupyterlab-kite>=2.0.2"
 EOF
+
 }
 
 #
