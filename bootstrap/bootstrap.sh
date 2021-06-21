@@ -337,6 +337,7 @@ function servicioJupyterLab {
 function instalarKite {
     echo "Instalo Kite Engine"
 
+    echo "-o StrictHostKeyChecking=no ${CONF_usuario}@localhost"
 ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     export CONF_usuario=$(id -un)
     echo "Instalo Kite Engine como usuario '${CONF_usuario}'"
@@ -348,15 +349,24 @@ ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     
     chmod a+x ./kite-installer.sh
     bash ./kite-installer.sh --download > /dev/null
-    bash ./kite-installer.sh --install > /dev/null
+    echo "Ejecuto kite-installer.sh --install"
+    bash ./kite-installer.sh --install
     rm -f ./kite-installer.sh
     
+    echo "Habilito kit-autostart.service y kit-updater.timer"
     #systemctl daemon-reload
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
+    sleep 2
+
+    echo "Arranco kit-autostart.service y kit-updater.timer"
     systemctl --user start kite-autostart.service
     systemctl --user start kite-updater.timer 
+    sleep 2
     
+    echo "Compruebo el estado de kit-autostart.service y kit-updater.timer"
+    systemctl --user status kite-autostart.service
+    systemctl --user status kite-updater.timer 
 EOF
 }
 
