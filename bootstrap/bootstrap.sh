@@ -332,7 +332,7 @@ function instalarKite {
 
 #sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
-ssh ${CONF_usuario}@localhost <<'EOF_KITE'
+ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF_KITE'
 
     export CONF_usuario=$(id -un)
 
