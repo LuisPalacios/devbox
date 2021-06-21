@@ -107,6 +107,17 @@ function configuraTeclado {
     udevadm trigger --subsystem-match=input --action=change
 }
 
+
+#
+# Creo el fichero id_rsa+id_rsa.pub para el usuario root. 
+# Voy a usarlo para poder ejecutar un ssh CONF_usuario@localhost 
+# Algo que necesito más adelante durante la instalación de Kite
+#
+function crearRootKeygen {
+    step "Ejecuto ssh-keygen para root"
+    ssh-keygen -q -t rsa -b 2048 -N "" -f /root/.ssh/id_rsa
+}
+
 #
 # Creo al usuario que me pasan en el yaml
 #
@@ -148,6 +159,10 @@ function addLocalUser {
     # el daemon SSHD solo acepta al usuario "CONF_usuario"
     # 
     su - ${CONF_usuario} -c "mkdir ~/.ssh; cat ${BOOTSTRAP_KEYS} > ~/.ssh/authorized_keys"
+
+    # añado la clave pública de root@localhost
+    cat /root/.ssh/id_rsa.pub >> /home/${CONF_usuario}/.ssh/authorized_keys
+
     #
     # Copio el fichero sshd_config que está bajo bootstrap y
     # es muy restrictivo. Solo acepta claves públicas
@@ -314,8 +329,12 @@ function servicioJupyterLab {
 
 function instalarKite {
     echo "Instalo Kite Engine"
-    
-sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
+
+#sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
+
+ssh ${CONF_usuario}@localhost <<'EOF_KITE'
+
+    export CONF_usuario=$(id -un)
 
     echo "Instalo Kite Engine como usuario '${CONF_usuario}'"
     cd /home/${CONF_usuario}
@@ -391,6 +410,7 @@ main() {
     configuraTeclado
     configuraLocale
     copiaLocalBin
+    crearRootKeygen
     addLocalUser
     instalarPaquetes
     instalarNodeJs
