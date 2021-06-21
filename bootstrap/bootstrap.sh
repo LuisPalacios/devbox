@@ -332,10 +332,8 @@ function instalarKite {
 
 #sudo -u "${CONF_usuario}" -i bash <<EOF_KITE
 
-ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF_KITE'
-
+ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     export CONF_usuario=$(id -un)
-
     echo "Instalo Kite Engine como usuario '${CONF_usuario}'"
     cd /home/${CONF_usuario}
     
@@ -350,10 +348,8 @@ ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF_KITE'
     
     systemctl daemon-reload
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
-    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer
-    
-EOF_KITE
-
+    systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
+EOF
 }
 
 #
@@ -361,8 +357,11 @@ EOF_KITE
 #
 function instalarJupyterLabExtensionKite {
     echo "Instalar la extension Kite para JupyterLab..."
+
+sudo -u "${CONF_usuario}" -i bash <<EOF
     source ~/venv/bin/activate
     pip install "jupyterlab-kite>=2.0.2"
+EOF
 }
 
 #
