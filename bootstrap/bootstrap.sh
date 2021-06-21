@@ -351,11 +351,11 @@ ssh -o StrictHostKeyChecking=no ${CONF_usuario}@localhost <<'EOF'
     bash ./kite-installer.sh --install > /dev/null
     rm -f ./kite-installer.sh
     
-    systemctl daemon-reload
+    #systemctl daemon-reload
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
     systemctl --user enable /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
-    systemctl --user start /home/${CONF_usuario}/.config/systemd/user/kite-autostart.service
-    systemctl --user start /home/${CONF_usuario}/.config/systemd/user/kite-updater.timer 
+    systemctl --user start kite-autostart.service
+    systemctl --user start kite-updater.timer 
     
 EOF
 }
