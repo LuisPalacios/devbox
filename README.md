@@ -93,8 +93,10 @@ luis@coder:~$
 A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab. Dependiendo del tipo de proveedor utilizado podrás acceder en local (desde tu propio ordenador) o desde la LAN. Aquí tienes algunos ejemplos: 
 
 - http://127.0.0.1:8001
-- http://<IP en tu red lan>:8001
+- http://A.B.C.D:8001
+- http://tu.dominio.com:8001
 
+<br/>
 
 **Configurar GIT**
 
@@ -105,6 +107,7 @@ $  git config --global user.email "you@example.com"
 $  git config --global user.name "Tu Nombre"
 ```
 
+![GIT en JupyterLab](vagrant-git.png?raw=true "GIT en JupyterLab")
 
 <br/>
 
