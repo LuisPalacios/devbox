@@ -242,7 +242,7 @@ luis @ idefix ➜  ~ ssh coder-via-internet
 luis@coder:~$
 ```
 
-| Alternativa: usar la opción `-N` que solamente activo el reenvío del puerto, sin terminal (shell): `ssh -N coder-via-internet` |
+> **Alternativa**: usar la opción `-N` que solamente activo el reenvío del puerto, sin terminal (shell): `ssh -N coder-via-internet` 
 
 * Conectamos con Jupyter Lab: http://127.0.0.1:8001
 
