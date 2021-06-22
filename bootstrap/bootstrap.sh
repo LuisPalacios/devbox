@@ -277,7 +277,7 @@ function instalarPaquetesPython_LocalUser {
     pip install networkx
     pip install cassandra-driver
     pip install git+https://github.com/dvillaj/ipython-cql.git
-    pip install jupyterlab
+    pip install jupyterlab==3.0.14
     pip install jupyterlab-git
     pip install jupyterlab-drawio
     pip install lckr-jupyterlab-variableinspector
