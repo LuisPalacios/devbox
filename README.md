@@ -86,9 +86,32 @@ luis@coder:~$
 
 <br/>
 
-## SSH 
+## Trabajo con la máquina virtual
 
-Nota sobre el Networking: El fichero `Vagrantfile` está preparado para configurar dos estrategias distintas dependiendo de quién sea tu proveedor (KVM o VirtualBox): 
+**Conectar con Jupyter Lab**
+
+A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab. Dependiendo del tipo de proveedor utilizado podrás acceder en local (desde tu propio ordenador) o desde la LAN. Aquí tienes algunos ejemplos: 
+
+- http://127.0.0.1:8001
+- http://<IP en tu red lan>:8001
+
+
+**Configurar GIT**
+
+Una vez dentro de JupyterLab puedes arrancar el Terminal y configurar GIT: 
+
+```console
+$  git config --global user.email "you@example.com"
+$  git config --global user.name "Tu Nombre"
+```
+
+
+<br/>
+
+
+## Configuración SSH 
+
+El fichero `Vagrantfile` está preparado para configurar dos estrategias distintas dependiendo de quién sea tu proveedor (KVM o VirtualBox / Parallels Desktop): 
 
 * VM en un HOST Linux con KVM/Libvirt - Uso networking público: Asigno una Dirección IP Fija a la VM 
 * VM en un HOST local con VirtualBox  - Uso networking privado: PORT FORWARDING
@@ -121,28 +144,9 @@ La contraseña es la de tu clave pública/privada
 ```console
 luis @ idefix ➜  ~  ssh coder
 Enter passphrase for key '/Users/luis/.ssh/id_rsa':
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
- _______________________________
-< Bienvenido a mi servidor luis >
- -------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
 
 luis@coder:~$
 ```
-
-**Conectar con Jupyter Lab**
-
-Lo normal es conectar desde tu red LAN o desde el mismo equipo donde la has instalado (por ejemplo en un Mac con VirtualBox). En el siguiente ejemplo utilicé la IP 192.168.1.13 en la sección `override.vm.network "public_network"` del `Vagrantfile`: 
-
-- http://127.0.0.1:8001
-- http://192.168.1.13:8001
 
 <br/>
 
@@ -167,30 +171,11 @@ Si la estableciste, recuerda que la contraseña es la de tu clave pública/priva
 ```console
 luis @ idefix ➜  ~  ssh coder-vb
 Enter passphrase for key '/Users/luis/.ssh/id_rsa':
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
- _______________________________
-< Bienvenido a mi servidor luis >
- -------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
 
 luis@coder:~$
 ```
-
-**Conectar con Jupyter Lab**
-
-A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab, por lo tanto podrás acceder en local (desde tu propio ordenador) o desde la red LAN a la que estes conectado:
-
-- http://127.0.0.1:8001
-- http://mi-ordernador.dominio.local:8001
-  
+ 
 <br/>
-
 
 ### HOST con Parallels Desktop
 
@@ -213,35 +198,15 @@ Si la estableciste, recuerda que la contraseña es la de tu clave pública/priva
 ```console
 luis @ idefix ➜  ~  ssh coder-prl
 Enter passphrase for key '/Users/luis/.ssh/id_rsa':
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
- _______________________________
-< Bienvenido a mi servidor luis >
- -------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
 
 luis@coder:~$
 ```
 
-**Conectar con Jupyter Lab**
-
-A partir de ahora ya puedes conectar con los servicios de esta máquina virtual. Observa en el fichero `Vagrantfile` los puertos mapeados, entre ellos el de JupyterLab, por lo tanto podrás acceder en local (desde tu propio ordenador). Si habilitaste la opcion de `networking público` deberías poder conectar desde la red LAN. 
-
-
-- http://127.0.0.1:8001
-- http://<IP en tu red lan>:8001
-  
 <br/>
-
 
 ### Conexión al HOST por internet vía SSH 
 
-Una situación que puede ser muy típica es que quieras conectar con tu HOST desde internet. Normalmente estará "protegido" detrás de un firewall por lo que no es sencillo acceder a él. Lo normal es acceder a un equipo intermedio vía SSH que sí tenga acceso a través de la LAN privada. Sería algo así: 
+Si quieres conectar con tu VM desde internet una posible solución es hacer SSH a un equipo intermedio (tu firewall) y que este pueda llegar a tu Host/VM a través de tu la LAN privada. Sería algo así: 
 
 
 ```config
@@ -257,7 +222,7 @@ Una situación que puede ser muy típica es que quieras conectar con tu HOST des
 
 ```
 
-Configuramos port forwarding en el Cliente: 
+* Configuramos SSH para llegar al SSHServer y además preparamos "port forwarding", de modo que él pueda reenviar el puerto 8001 al HOST/VM
 
 ```console
 Host coder-via-internet
@@ -267,30 +232,20 @@ Host coder-via-internet
   LocalForward 8001 192.168.1.13:8001
 ```
 
-Conectamos con el intermediario,
-
+* Conectamos con el SSHServer, tendremos acceso al terminal (shell) y el reenvío del puerto activo. 
+  
 ```console
-luis @ idefix ➜  ~  ssh coder-via-internet
+luis @ idefix ➜  ~ ssh coder-via-internet
 luis@coder:~$
 ```
 
-Otra opcion es usar la opción `-N` que evita abrir una sheel contra el intermediario. 
+| Alternativa: usar la opción `-N` que solamente activo el reenvío del puerto, sin terminal (shell): `ssh -N coder-via-internet` |
 
-```console
-luis @ idefix ➜  ~  ssh -N coder-via-internet
-```
+* Conectamos con Jupyter Lab: http://127.0.0.1:8001
 
 <br/>
 
-**Conectar con Jupyter Lab**
-
-En ambos casos tendrás acceso vía: 
-
-- http://127.0.0.1:8001
-
-<br/>
-
-## Proyecto relacionados.
+## Proyectos relacionados.
 
 Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, que puedes usar para dotar de contenido a tu máquina virtual. 
 
