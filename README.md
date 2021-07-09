@@ -248,6 +248,17 @@ luis@coder:~$
 
 <br/>
 
+
+## Integración con GIT (Github o Gitlab)
+
+Si queremos conectar con servidores de Git externos (github o gitlab) podemos preparar nuestra máquina virtual. 
+
+- Abrimos un terminal. 
+- Ejecutamos: `ssh-keygen -t rsa -b 2048`
+- Guardamos `~/.ssh/id_rsa.pub` en github o gitlab
+
+<br/>
+
 ## Proyectos relacionados.
 
 Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, que puedes usar para dotar de contenido a tu máquina virtual. 

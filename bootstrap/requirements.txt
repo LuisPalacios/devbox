@@ -192,6 +192,8 @@ umap-learn
 plotly
 mlxtend
 
+# deep learning
+opencv-python
 
 # https://github.com/jupyterlab/jupyterlab-git/releases
 jupyterlab-git
