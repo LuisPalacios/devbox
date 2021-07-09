@@ -260,6 +260,7 @@ function instalarPaquetesPython_LocalUser {
     pip install pandas
     pip install matplotlib
     pip install seaborn
+    pip install plotly
     pip install xlrd
     pip install xlwt
     pip install openpyxl
@@ -276,6 +277,7 @@ function instalarPaquetesPython_LocalUser {
     pip install ipython-cypher
     pip install networkx
     pip install cassandra-driver
+    pip install umap-learn
     pip install git+https://github.com/dvillaj/ipython-cql.git
     pip install jupyterlab==3.0.14  # Esta versión soporta Kite 100% !!
     pip install jupyterlab-git
@@ -302,6 +304,7 @@ function instalarJupyterLabExtensions_LocalUser {
     jupyter contrib nbextension install --user
     jupyter nbextensions_configurator enable --user
     jupyter lab build
+    jupyter labextension install @jupyterlab/plotly-extension 
 
 }
 function instalarJupyterLabExtensions {
