@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       libvirt.cpus = 4
       libvirt.memory = 4096
 
-      # Networking con IP Pública
+      # Un ejemplo de Networking con IP Pública (intranet)
       # En el HOST Linux espero el bridge 'br0'
       # y que tenga asociada su interfaz Ethernet.
       #
@@ -46,7 +46,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                       :dev => "br0",
                       :mode => "bridge",
                       :type => "bridge",
-                      :ip => "192.168.100.13"
+                      :ip => "192.168.100.13",
+                      :dns_nameserver => '192.168.100.1',
+                      :dns_search => 'parchis.org'
     end
     
     # Para Virtualbox
