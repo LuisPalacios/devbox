@@ -283,6 +283,7 @@ function instalarPaquetesPython_LocalUser {
     pip install opencv-python
     pip install tensorflow
     pip install gensim
+    pip install python-Levenshtein
     pip install git+https://github.com/dvillaj/ipython-cql.git
     pip install jupyterlab==3.0.14  # Esta versión soporta Kite 100% !!
     pip install jupyterlab-git
