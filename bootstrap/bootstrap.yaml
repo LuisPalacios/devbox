@@ -37,3 +37,5 @@ teclado: 'es'
 # Sobreescribir DNS (probado con libvirt)
 mydns: 'true'
 
+# Dedico 11,5GB de memoria
+buffersize: '12348030976'

@@ -285,13 +285,14 @@ function instalarPaquetesPython_LocalUser {
     pip install gensim
     pip install python-Levenshtein
     pip install git+https://github.com/dvillaj/ipython-cql.git
+    pip install nbconvert==5.6.1
     pip install jupyterlab==3.0.14  # Esta versión soporta Kite 100% !!
     pip install jupyterlab-git
     pip install jupyterlab-drawio
+    pip install jupyter-resource-usage
     pip install lckr-jupyterlab-variableinspector
     pip install jupyter_nbextensions_configurator
     pip install jupyter_contrib_nbextensions
-
 }
 
 function instalarPaquetesPython {

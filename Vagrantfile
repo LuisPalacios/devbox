@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       libvirt.driver = "kvm"
       libvirt.host = conf['linuxhost']
       libvirt.cpus = 4
-      libvirt.memory = 4096
+      libvirt.memory = 12288
 
       # Un ejemplo de Networking con IP Pública (intranet)
       # En el HOST Linux espero el bridge 'br0'
@@ -53,8 +53,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Para Virtualbox
     coder.vm.provider "virtualbox" do |vb, override|
       vb.name = conf['hostname'] || 'coder'
-      vb.cpus = 2
-      vb.memory = 3048
+      vb.cpus = 4
+      vb.memory = 12288
 
       # Forwarding solo si la VM está en VirtualBox
       # en mi propio ordenador desktop (mac o windows)
@@ -75,7 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     coder.vm.provider "parallels" do |prl, override|
       prl.name = conf['hostname'] || 'coder'
       prl.cpus = 4
-      prl.memory = 4096
+      prl.memory = 12288
       prl.update_guest_tools = true
 
       # Forwarding solo si la VM está en VirtualBox

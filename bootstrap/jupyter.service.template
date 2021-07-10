@@ -5,6 +5,8 @@ After=syslog.target network.target
 [Service]
 Type=simple
 PIDFile=/run/jupyter.pid
+MemoryHigh=${CONF_buffersize}
+MemoryMax=${CONF_buffersize}
 ExecStart=/bin/bash -c ". /usr/local/bin/jupyter.sh"
 User=${CONF_usuario}
 Group=${CONF_usuario}
