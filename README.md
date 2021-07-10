@@ -257,6 +257,12 @@ Si queremos conectar con servidores de Git externos (github o gitlab) podemos pr
 - Ejecutamos: `ssh-keygen -t rsa -b 2048`
 - Guardamos `~/.ssh/id_rsa.pub` en github o gitlab
 
+Si vamos a trabajar contra esos servidores, también es recomendable configurar el cliente git
+
+- `git config --global user.name "Coder Parchis"`
+- `git config --global user.email "coderparchis@gmail.com"`
+
+
 <br/>
 
 ## Proyectos relacionados.
