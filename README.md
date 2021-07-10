@@ -261,17 +261,7 @@ Si queremos conectar con servidores de Git externos (github o gitlab) podemos pr
 
 ## Proyectos relacionados.
 
-Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, que puedes usar para dotar de contenido a tu máquina virtual. 
-
-* [Ejercicios de Data Science](https://github.com/LuisPalacios/Master-DS). Un repositorio dedicado a albergar ejercicios y material utilizado durante el Master en Data Science al que asistí durante Marzo de 2021.
-
-```console
- $ ssh luis@coder
- $ cd notebooks
- $ git clone https://github.com/LuisPalacios/Master-DS.git
-```
-
-* [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo. Te permitirá instalar servidores Postgres, Riak, Cassandra, Mongodb, Neo4j, etc. usando Docker
+Para poder sacarle provecho a esta máquina virtual y al entorno `JupyterLab`necesitarás contenido. Aquí tienes un proyecto interesante, [Taller de Bases de Datos](https://github.com/dvillaj/Taller_BBDD) de Daniel Villanueva. Desde la shell de tu máquina virtual ejecuta el comando `curl` que puedes ver en el siguiente ejemplo. Te permitirá instalar servidores Postgres, Riak, Cassandra, Mongodb, Neo4j, etc. usando Docker
 
 ```console
  $ ssh luis@coder
