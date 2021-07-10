@@ -34,3 +34,6 @@ timezone: 'Europe/Madrid'
 # Teclado
 teclado: 'es'
 
+# Sobreescribir DNS (probado con libvirt)
+mydns: 'true'
+

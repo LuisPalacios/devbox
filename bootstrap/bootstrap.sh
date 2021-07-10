@@ -334,6 +334,51 @@ function servicioJupyterLab {
 }
 
 #
+# Modificar el DNS Server. Esto lo utilizo con libvirt y la IP pública
+#
+# Reset netplan config, not really needed; just to clearly indicate no fixed dns is used
+function modificarDNS {
+
+    if [ "${CONF_mydns}" != "true" ]; then
+       # echo "No modifico el DNS"
+       return
+    fi
+
+    step "modifico DNS"
+
+tee <<EOF > /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+      dhcp6: false
+      optional: true
+      nameservers:
+        addresses: []
+EOF
+netplan generate
+
+# Remove fixed DNS entries and disable DNSSEC
+tee <<EOF > /etc/systemd/resolved.conf
+[Resolve]
+DNS=
+FallbackDNS=
+Domains=
+#LLMNR=no
+#MulticastDNS=no
+DNSSEC=no
+Cache=yes
+DNSStubListener=yes
+EOF
+
+systemctl daemon-reload
+systemctl restart systemd-resolved
+
+}
+
+#
 # Para instalar KITE necesitamos poder ejecutar systemctl --user, por lo tanto necesito
 # entrar con "SSH" vs "SUDO/SU"
 # sudo/su - se emplean para cambiar la identidad del usuario, no fueron diseñadas para
@@ -429,6 +474,7 @@ main() {
 
     leeConfigYAML
     compruebaLinux
+    modificarDNS
     configuraGrub
     configuraTimezone
     configuraTeclado

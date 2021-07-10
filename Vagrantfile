@@ -46,9 +46,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                       :dev => "br0",
                       :mode => "bridge",
                       :type => "bridge",
-                      :ip => "192.168.100.13",
-                      :dns_nameserver => '192.168.100.1',
-                      :dns_search => 'parchis.org'
+                    # :ip => "192.168.100.13",  Comentado para usar DHCP !!
+                      :mac => "52:54:00:40:40:13"
     end
     
     # Para Virtualbox
