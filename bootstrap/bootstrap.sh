@@ -280,6 +280,7 @@ function instalarPaquetesPython_LocalUser {
     pip install umap-learn
     pip install plotly
     pip install mlxtend
+    pip install statsmodels
     pip install opencv-python
     pip install tensorflow
     pip install gensim
